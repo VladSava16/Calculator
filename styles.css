@@ -1,0 +1,42 @@
+body{
+    font-size: 28px;
+}
+.calculator{
+    width: 400px;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    margin: 0;
+    padding: 0;
+}
+.display{
+    width: 100%;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+.answer{
+    align-self: flex-end;
+}
+.display-text{
+    /* margin-right: 50px; */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.current-expression{
+    font-size: 22px;
+}
+.buttons{
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    padding: 5px;
+    /* gap: 3px; */
+}
+button{
+    flex: 1 1 25%;
+}

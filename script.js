@@ -65,8 +65,8 @@ const clearButton = document.querySelector(".clear");
 const deleteButton = document.querySelector(".delete");
 const decimalButton = document.querySelector(".decimal");
 
-const numberButtons = document.querySelector(".numbers");
-numberButtons.childNodes.forEach(btn => btn.addEventListener("click", (e) =>{
+const numberButtons = document.querySelectorAll(".numbers");
+numberButtons.forEach(btn => btn.addEventListener("click", (e) =>{
     if(op === ""){
         no1 = no1 + e.target.textContent;
         currentExpression.textContent = no1;
@@ -77,8 +77,8 @@ numberButtons.childNodes.forEach(btn => btn.addEventListener("click", (e) =>{
     }
 }));
 
-const operatorButtons = document.querySelector(".operators");
-operatorButtons.childNodes.forEach(operator => operator.addEventListener("click", (e) => {
+const operatorButtons = document.querySelectorAll(".operators");
+operatorButtons.forEach(operator => operator.addEventListener("click", (e) => {
     if(no2 !== ""){
         let partAns = operate(+no1, +no2, op);
         answer.textContent = partAns;
