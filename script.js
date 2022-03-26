@@ -28,6 +28,7 @@ function Clear(){
     no1 = no2 = op = ans = "";
     currentExpression.textContent = "";
     answer.textContent = "";
+    decimalButton.disabled = false;
 }
 
 function deleteLastDigit(currentNo){
@@ -88,10 +89,14 @@ operatorButtons.childNodes.forEach(operator => operator.addEventListener("click"
         decimalButton.disabled = false;
     }
     else{
+        if(e.target.textContent == "-" && no1 == "")
+            no1 += "-";
+        else{
         op = e.target.textContent;
         console.log(op);
         currentNo = 2;
         decimalButton.disabled = false;
+        }
     }
     currentExpression.textContent = no1 + op;
 }));
