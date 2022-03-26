@@ -24,6 +24,12 @@ function operate(a, b, op){
         return divide(a, b);
 }
 
+function Clear(){
+    no1 = no2 = op = ans = null;
+    currentExpression.textContent = "";
+    answer.textContent = "";
+}
+
 let no1 = null;
 let no2 = null;
 let op = null;
@@ -31,6 +37,7 @@ let ans = null;
 
 const currentExpression = document.querySelector(".current-expression");
 const answer = document.querySelector(".answer");
+const clearButton = document.querySelector(".clear");
 
 const numberButtons = document.querySelector(".numbers");
 numberButtons.childNodes.forEach(btn => btn.addEventListener("click", (e) =>{
@@ -67,3 +74,5 @@ equalButton.addEventListener("click", (e) =>{
         op = no2 = null;
     }
 });
+
+clearButton.addEventListener("click", () => Clear());
