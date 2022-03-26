@@ -32,16 +32,22 @@ function Clear(){
 
 function deleteLastDigit(currentNo){
     if(currentNo == 1){
-        if(no1 !== "")
+        if(no1 !== ""){
+            if(no1.charAt(no1.length - 1) == ".")
+                decimalButton.disabled = false;
             no1 = no1.slice(0, -1);
+        }
         else
             no1 = "0";
     }
-    else{
-        if(no2 >0)
-            no2 = Math.floor(no2 / 10);
+    else if(currentNo == 2){
+        if(no2 !== ""){
+            if(no2.charAt(no2.length - 1) == ".")
+                decimalButton.disabled = false;
+            no2 = no2.slice(0, -1);
+        }
         else
-            no2 = Math.ceil(no2 / 10);
+            no2 = "0";
     }
     currentExpression.textContent = no1 + op + no2;
 }
@@ -68,7 +74,6 @@ numberButtons.childNodes.forEach(btn => btn.addEventListener("click", (e) =>{
         no2 = no2 + e.target.textContent;
         currentExpression.textContent = no1 + op + no2;
     }
-
 }));
 
 const operatorButtons = document.querySelector(".operators");
@@ -80,11 +85,13 @@ operatorButtons.childNodes.forEach(operator => operator.addEventListener("click"
         no2 = "";
         op = e.target.textContent;
         currentNo = 2;
+        decimalButton.disabled = false;
     }
     else{
         op = e.target.textContent;
         console.log(op);
         currentNo = 2;
+        decimalButton.disabled = false;
     }
     currentExpression.textContent = no1 + op;
 }));
@@ -103,4 +110,20 @@ equalButton.addEventListener("click", (e) =>{
 
 clearButton.addEventListener("click", () => Clear()); // handles the clear onclick event
 deleteButton.addEventListener("click", () => deleteLastDigit(currentNo));
-decimalButton.addEventListener("click", (e) => e.target.disabled = true)
+decimalButton.addEventListener("click", (e) =>{
+    if(currentNo == 1){
+        if(no1 == "")
+            no1 = "0.";
+        else
+            no1 += ".";
+        currentExpression.textContent = no1;
+    }
+    else{
+        if(no2 == "")
+            no2 = "0.";
+        else
+            no2 += ".";
+        currentExpression.textContent = no1 + op + no2;
+    }
+    decimalButton.disabled = true;
+});
