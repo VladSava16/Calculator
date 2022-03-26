@@ -1,16 +1,16 @@
 function add(a, b){
-    return a + b;
+    return Number((a + b).toFixed(1));
 }
 function subtract(a, b){
-    return a - b;
+    return Number((a - b).toFixed(1));
 }
 function multiply(a, b){
-    return a * b;
+    return Number((a * b).toFixed(1));
 }
 function divide(a, b){
     if(b === 0)
         return "ERROR";
-    return a / b;
+    return Number((a / b).toFixed(1));
 }
 
 function operate(a, b, op){
@@ -32,10 +32,10 @@ function Clear(){
 
 function deleteLastDigit(currentNo){
     if(currentNo == 1){
-        if(no1 > 0)
-            no1 = Math.floor(no1 / 10);
+        if(no1 !== "")
+            no1 = no1.slice(0, -1);
         else
-            no1 = Math.ceil(no1 / 10);
+            no1 = "0";
     }
     else{
         if(no2 >0)
