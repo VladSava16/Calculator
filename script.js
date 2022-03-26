@@ -9,7 +9,7 @@ function multiply(a, b){
 }
 function divide(a, b){
     if(b === 0)
-        return "ERROR";
+        return "ERROR. Please reset.";
     return Number((a / b).toFixed(1));
 }
 
