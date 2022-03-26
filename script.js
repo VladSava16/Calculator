@@ -27,6 +27,10 @@ function operate(a, b, op){
 let no1 = null;
 let no2 = null;
 let op = null;
+let ans = null;
+
+const currentExpression = document.querySelector(".current-expression");
+const answer = document.querySelector(".answer");
 
 const numberButtons = document.querySelector(".numbers");
 numberButtons.childNodes.forEach(btn => btn.addEventListener("click", (e) =>{
@@ -39,13 +43,26 @@ numberButtons.childNodes.forEach(btn => btn.addEventListener("click", (e) =>{
 
 const operatorButtons = document.querySelector(".operators");
 operatorButtons.childNodes.forEach(operator => operator.addEventListener("click", (e) => {
-    if (e.target.classList.value == "plus")
-        op = "+";
-    else if(e.target.classList.value == "minus")
-        op = "-";
-    else if(e.target.classList.value == "multiply")
-        op = "*";
-    else
-        op = "/";
-    console.log(op);
+    if(no2 !== null){
+        let partAns = operate(no1, no2, op);
+        answer.textContent = partAns;
+        no1 = partAns;
+        no2 = null;
+        op = e.target.textContent;
+    }
+    else{
+        op = e.target.textContent;
+        console.log(op);
+    }
 }));
+
+const equalButton = document.querySelector(".equal");
+equalButton.addEventListener("click", (e) =>{
+    if(op === null)
+        answer.textContent = no1;
+    else{
+        answer.textContent = operate(no1, no2, op);
+        no1 = +answer.textContent;
+        op = no2 = null;
+    }
+});
