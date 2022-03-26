@@ -38,7 +38,7 @@ numberButtons.childNodes.forEach(btn => btn.addEventListener("click", (e) =>{
         no1 = no1 * 10 + +e.target.textContent;
     else
         no2 = no2 * 10 + +e.target.textContent;
-    console.log(no1, no2);
+    currentExpression.textContent = no1 + op + no2;
 }));
 
 const operatorButtons = document.querySelector(".operators");
@@ -54,11 +54,12 @@ operatorButtons.childNodes.forEach(operator => operator.addEventListener("click"
         op = e.target.textContent;
         console.log(op);
     }
+    currentExpression.textContent = no1 + op;
 }));
 
 const equalButton = document.querySelector(".equal");
 equalButton.addEventListener("click", (e) =>{
-    if(op === null)
+    if(no2 === null)
         answer.textContent = no1;
     else{
         answer.textContent = operate(no1, no2, op);
