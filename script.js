@@ -25,7 +25,7 @@ function operate(a, b, op){
 }
 
 function Clear(){
-    no1 = no2 = op = ans = null;
+    no1 = no2 = op = ans = "";
     currentExpression.textContent = "";
     answer.textContent = "";
 }
@@ -46,33 +46,38 @@ function deleteLastDigit(currentNo){
     currentExpression.textContent = no1 + op + no2;
 }
 
-let no1 = null;
-let no2 = null;
-let op = null;
-let ans = null;
+let no1 = "";
+let no2 = "";
+let op = "";
+let ans = "";
 let currentNo = 1;
 
 const currentExpression = document.querySelector(".current-expression");
 const answer = document.querySelector(".answer");
 const clearButton = document.querySelector(".clear");
 const deleteButton = document.querySelector(".delete");
+const decimalButton = document.querySelector(".decimal");
 
 const numberButtons = document.querySelector(".numbers");
 numberButtons.childNodes.forEach(btn => btn.addEventListener("click", (e) =>{
-    if(op === null)
-        no1 = no1 * 10 + +e.target.textContent;
-    else
-        no2 = no2 * 10 + +e.target.textContent;
-    currentExpression.textContent = no1 + op + no2;
+    if(op === ""){
+        no1 = no1 + e.target.textContent;
+        currentExpression.textContent = no1;
+    }
+    else{
+        no2 = no2 + e.target.textContent;
+        currentExpression.textContent = no1 + op + no2;
+    }
+
 }));
 
 const operatorButtons = document.querySelector(".operators");
 operatorButtons.childNodes.forEach(operator => operator.addEventListener("click", (e) => {
-    if(no2 !== null){
-        let partAns = operate(no1, no2, op);
+    if(no2 !== ""){
+        let partAns = operate(+no1, +no2, op);
         answer.textContent = partAns;
         no1 = partAns;
-        no2 = null;
+        no2 = "";
         op = e.target.textContent;
         currentNo = 2;
     }
@@ -86,15 +91,16 @@ operatorButtons.childNodes.forEach(operator => operator.addEventListener("click"
 
 const equalButton = document.querySelector(".equal");
 equalButton.addEventListener("click", (e) =>{
-    if(no2 === null)
+    if(no2 === "")
         answer.textContent = no1;
     else{
-        answer.textContent = operate(no1, no2, op);
+        answer.textContent = operate(+no1, +no2, op);
         no1 = +answer.textContent;
-        op = no2 = null;
+        op = no2 = "";
         currentNo = 1;
     }
 });
 
 clearButton.addEventListener("click", () => Clear()); // handles the clear onclick event
 deleteButton.addEventListener("click", () => deleteLastDigit(currentNo));
+decimalButton.addEventListener("click", (e) => e.target.disabled = true)
